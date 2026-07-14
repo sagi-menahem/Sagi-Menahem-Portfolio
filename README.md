@@ -31,6 +31,18 @@ A portfolio website combining modern web technologies with immersive 3D visuals.
 
 <br />
 
+## How This Was Built
+
+Built solo, **AI-first**: I orchestrate AI coding agents (Claude Code, Codex) through a documented methodology rather than writing every line by hand — the engineering discipline is the point, not the speed.
+
+- **`AGENTS.md` as the single source of truth** — a rules file in the repo defines the architecture, conventions, and hard constraints every agent must obey: strict Canvas/DOM separation (`canvas/` Three.js-only, `dom/` React-only, never mixed), Core Web Vitals budgets (LCP < 2.5s, CLS < 0.1), and WCAG AA color contrast with full keyboard navigation.
+- **Guardrail scripts & audit pipelines** — automated checks run on every change (GLSL/Three.js performance checks on particle counts and staggered init timing, reduced-motion and accessibility audits, Core Web Vitals measurement against the documented targets), so quality is enforced by tooling, not vigilance.
+- **The engineer decides, the agent executes** — every component, content model, and architectural choice on this page was designed and reviewed by me. Agents accelerate implementation; they never own the design.
+
+The result: a polished production site delivered at team-level velocity — with the discipline the decisions below reflect.
+
+<br />
+
 ## Architecture
 
 ### Canvas/DOM Separation
@@ -141,16 +153,11 @@ Heavy components deferred via `setTimeout` to avoid TBT impact. `React.lazy` onl
 <br />
 
 <div align="center">
-  <a href="https://sagimenahem.tech">
-    <img src="https://img.shields.io/badge/sagimenahem.tech-0D2440?style=for-the-badge&logo=vercel&logoColor=white" alt="Visit Site" />
-  </a>
-  <br /><br />
-  <b>Built by Sagi Menahem</b>
-  <br /><br />
-  <a href="https://github.com/sagi-menahem">
-    <img src="https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=github&logoColor=white" alt="GitHub" />
-  </a>
-  <a href="https://www.linkedin.com/in/sagi-menahem/">
-    <img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=flat-square&logo=linkedin&logoColor=white" alt="LinkedIn" />
-  </a>
+
+**Built by Sagi Menahem**
+
+[![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=github&logoColor=white)](https://github.com/sagi-menahem)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0A66C2?style=flat-square&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/sagi-menahem/)
+[![Portfolio](https://img.shields.io/badge/Portfolio-0D2440?style=flat-square&logo=googlechrome&logoColor=white)](https://sagimenahem.tech)
+
 </div>
