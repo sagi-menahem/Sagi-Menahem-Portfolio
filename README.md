@@ -1,4 +1,4 @@
-<div align="center">
+﻿<div align="center">
   <img src="public/web-app-manifest-512x512.png" alt="Logo" width="120" />
   <h1>Sagi Menahem - Portfolio</h1>
   <p>High-performance portfolio with immersive 3D visuals</p>
@@ -33,13 +33,7 @@ A portfolio website combining modern web technologies with immersive 3D visuals.
 
 ## How This Was Built
 
-Built solo, **AI-first**: I orchestrate AI coding agents (Claude Code, Codex) through a documented methodology rather than writing every line by hand — the engineering discipline is the point, not the speed.
-
-- **`AGENTS.md` as the single source of truth** — a rules file in the repo defines the architecture, conventions, and hard constraints every agent must obey: strict Canvas/DOM separation (`canvas/` Three.js-only, `dom/` React-only, never mixed), Core Web Vitals budgets (LCP < 2.5s, CLS < 0.1), and WCAG AA color contrast with full keyboard navigation.
-- **Guardrail scripts & audit pipelines** — automated checks run on every change (GLSL/Three.js performance checks on particle counts and staggered init timing, reduced-motion and accessibility audits, Core Web Vitals measurement against the documented targets), so quality is enforced by tooling, not vigilance.
-- **The engineer decides, the agent executes** — every component, content model, and architectural choice on this page was designed and reviewed by me. Agents accelerate implementation; they never own the design.
-
-The result: a polished production site delivered at team-level velocity — with the discipline the decisions below reflect.
+Built AI-first: I orchestrate AI coding agents (Claude Code, Codex) under guardrail scripts and audit pipelines that run on every change — but every component, content model, and architectural decision here was designed and reviewed by me. Agents accelerate implementation; they don't own the design.
 
 <br />
 
