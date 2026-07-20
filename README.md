@@ -29,13 +29,6 @@ A portfolio website combining modern web technologies with immersive 3D visuals.
 - Progressive SVG line drawing
 - Terminal boot preloader with typewriter effect
 
-<br />
-
-## How This Was Built
-
-Built AI-first: I orchestrate AI coding agents (Claude Code, Codex) under guardrail scripts and audit pipelines that run on every change — but every component, content model, and architectural decision here was designed and reviewed by me. Agents accelerate implementation; they don't own the design.
-
-<br />
 
 ## Architecture
 
