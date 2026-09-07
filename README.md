@@ -1,4 +1,4 @@
-![Sagi Menahem Portfolio — interactive 3D portfolio](assets/brand/banner.svg)
+![Sagi Menahem Portfolio — interactive 3D portfolio](assets/brand/banner.png)
 
 # Sagi Menahem Portfolio
 
