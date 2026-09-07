@@ -1,150 +1,43 @@
-﻿<div align="center">
-  <img src="public/web-app-manifest-512x512.png" alt="Logo" width="120" />
-  <h1>Sagi Menahem - Portfolio</h1>
-  <p>High-performance portfolio with immersive 3D visuals</p>
-  <br />
-  <a href="https://sagimenahem.tech">
-    <img src="https://img.shields.io/badge/View_Live-sagimenahem.tech-0D2440?style=for-the-badge&logo=vercel&logoColor=white" alt="Live Site" />
-  </a>
-  <br /><br />
-  <img src="https://img.shields.io/badge/Lighthouse-95+-4ade80?style=flat-square&logo=lighthouse&logoColor=white" alt="Lighthouse" />
-  <img src="https://img.shields.io/badge/Accessibility-100-4ade80?style=flat-square" alt="Accessibility" />
-  <br /><br />
-  <img src="https://img.shields.io/badge/Astro_5-FF5D01?style=flat-square&logo=astro&logoColor=white" alt="Astro" />
-  <img src="https://img.shields.io/badge/React_19-61DAFB?style=flat-square&logo=react&logoColor=black" alt="React" />
-  <img src="https://img.shields.io/badge/Three.js-000000?style=flat-square&logo=threedotjs&logoColor=white" alt="Three.js" />
-  <img src="https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white" alt="TypeScript" />
-  <img src="https://img.shields.io/badge/Tailwind_v4-06B6D4?style=flat-square&logo=tailwindcss&logoColor=white" alt="Tailwind" />
-  <img src="https://img.shields.io/badge/GSAP-88CE02?style=flat-square&logo=greensock&logoColor=black" alt="GSAP" />
-</div>
+![Sagi Menahem Portfolio — interactive 3D portfolio](assets/brand/banner.svg)
 
-<br />
+# Sagi Menahem Portfolio
 
-## Overview
+My personal portfolio presents selected software work and the thinking behind it. It is an independent personal project by Sagi Menahem, founder of [AfterTech](https://www.after-tech.co.il/), built to make projects easy to explore without reducing the site to a static list of links.
 
-A portfolio website combining modern web technologies with immersive 3D visuals. Features GPU-accelerated particle backgrounds, scroll-synchronized animations, and a cinematic preloader.
+**Project type:** personal portfolio · **Role:** designer and engineer · **Source:** private; this repository is a public case study. · [Visit the portfolio](https://sagimenahem.tech)
 
-- Custom GLSL shaders for real-time particle physics (12,000 particles at 60fps)
-- Infinite fly-through animation synced to scroll
-- Progressive SVG line drawing
-- Terminal boot preloader with typewriter effect
+## Preview
 
+<p align="center">
+  <img src="docs/screenshots/desktop.png" alt="Sagi Menahem portfolio on desktop" width="68%" />
+  <img src="docs/screenshots/mobile.png" alt="Sagi Menahem portfolio on mobile" width="26%" />
+</p>
 
-## Architecture
+## Problem and solution
 
-### Canvas/DOM Separation
+A portfolio has to show both the finished work and the person making it. A conventional gallery is easy to scan but can feel detached from the engineering it represents; an immersive site can become an obstacle if the visual layer competes with the content.
 
-Strict boundary between 3D and DOM concerns:
+This portfolio uses a 3D visual language as an entry point, then lets the browser step back when it is time to read. The result is a site with a distinct identity that still prioritizes project stories, navigation, and responsive use across desktop and mobile.
 
-```
-src/components/
-├── canvas/     # Three.js only — no HTML
-└── dom/        # React only — no Three.js
-```
+## Product highlights
 
-### Dual-Frequency State
+- A custom visual world built around interactive particles, a scroll-driven fly-through, and SVG line work.
+- Project-focused content that connects live work, case studies, and contact paths.
+- Motion that adapts to the available screen and respects the operating system's reduced-motion preference.
+- A responsive layout that preserves the content hierarchy when 3D treatment is reduced on smaller devices.
 
-| System | Rate | Purpose |
-|:-------|:-----|:--------|
-| `scrollRef` | 60fps | 3D animations (no re-renders) |
-| Zustand | ~1fps | UI state (nav, sections) |
+## Engineering decisions
 
-### Staggered Initialization
+The implementation separates canvas work from DOM content. Three.js components own the visual scene while React content remains independently renderable and accessible as regular page structure. That division makes it possible to evolve the visual treatment without turning every content change into a graphics change.
 
-| Component | Desktop | Mobile |
-|:----------|:--------|:-------|
-| DataParticles | 100ms | 500ms |
-| ScrollLine | 2000ms | 3000ms |
-| Effects | 2500ms | 4000ms |
+High-frequency scroll values stay in refs for animation instead of triggering React renders. Heavier visual components are initialized in stages, and particle geometry is prepared away from the main UI path. The design uses Astro for content delivery and React islands only where interactivity earns its cost.
 
-Heavy components deferred via `setTimeout` to avoid TBT impact. `React.lazy` only defers loading, not execution.
+The site favors graceful degradation over a single fixed visual effect. Desktop can use richer scrolling and post-processing while mobile retains native scrolling and a lighter presentation. Those choices keep the portfolio useful even when device capability differs.
 
-<br />
+## Stack
 
-## Design Decisions
+Astro, React, TypeScript, Three.js, React Three Fiber, GLSL, GSAP, Lenis, Zustand, Web Workers, and Tailwind CSS.
 
-**Astro + React** — Static generation for content, React islands for interactivity. Zero JS by default.
+---
 
-**Custom GLSL** — GPU-side particle animation. No runtime overhead from shader generators.
-
-**Hybrid Scroll** — Lenis on desktop, native scroll on mobile for best UX. Address bar stays visible.
-
-**Web Workers** — Particle geometry computed off main thread. Eliminates 50ms blocking.
-
-<br />
-
-## Performance
-
-### Core Web Vitals
-
-| Metric | Target | Result |
-|:-------|:-------|:-------|
-| LCP | < 2.5s | ~1.8s |
-| FID | < 100ms | < 50ms |
-| CLS | < 0.1 | < 0.05 |
-
-### Optimizations
-
-1. Staggered 3D init (outside TBT window)
-2. Web Worker geometry generation
-3. Ref-based scroll (zero re-renders)
-4. Throttled ScrollTrigger (30fps mobile)
-5. Conditional post-processing
-6. Self-hosted fonts
-
-<br />
-
-## Visual System
-
-### Sapphire Veil Palette
-
-| Token | Value | Usage |
-|:------|:------|:------|
-| Background | `#0D2440` | Deep Navy |
-| Primary | `#7BA4D0` | Steel Blue |
-| Accent | `#4B7CB0` | Mid-tone |
-| Text | `#E7F0FA` | Ice Blue |
-
-### Typography
-
-| Role | Font |
-|:-----|:-----|
-| Display | Space Grotesk |
-| Hero | Chakra Petch |
-| Body | Inter |
-| Code | JetBrains Mono |
-
-<br />
-
-## Tech Stack
-
-| Layer | Technology |
-|:------|:-----------|
-| Framework | Astro 5 |
-| UI | React 19 |
-| 3D | Three.js 0.181, @react-three/fiber 9 |
-| Animation | GSAP, Lenis (desktop), Framer Motion |
-| State | Zustand 5 |
-| Styling | Tailwind CSS 4 |
-| Language | TypeScript 5.9 |
-
-<br />
-
-## Accessibility
-
-- Reduced motion support (respects OS preference)
-- WCAG AA color contrast
-- Full keyboard navigation
-- Visible focus indicators
-
-<br />
-
-<div align="center">
-
-**Built by Sagi Menahem**
-
-[![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=github&logoColor=white)](https://github.com/sagi-menahem)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-0A66C2?style=flat-square&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/sagi-menahem/)
-[![Portfolio](https://img.shields.io/badge/Portfolio-0D2440?style=flat-square&logo=googlechrome&logoColor=white)](https://sagimenahem.tech)
-
-</div>
+Built by **[Sagi Menahem](https://www.sagimenahem.tech/)** · [LinkedIn](https://www.linkedin.com/in/sagi-menahem/)
